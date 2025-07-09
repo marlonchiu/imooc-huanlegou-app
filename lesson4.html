@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="./libs/react.min.js" crossorigin></script>
+    <script src="./libs/react-dom.min.js" crossorigin></script>
+    <script src="./libs/babel.min.js" crossorigin></script>
+
+    <script type="text/babel">
+      const welcomeStr = 'welcome to my app one'
+      const styleObject = {
+        color: 'blue'
+      }
+
+      const isLogin = true
+
+      // 登陆子组件
+      function Login() {
+        return <div>Already Login!</div>
+      }
+      // 非登陆子组件
+      function UnLogin() {
+        return <div>Haven't Login!</div>
+      }
+
+      // 按钮组件
+      function MyButton() {
+        return <button>I'm a button</button>
+      }
+
+      // 页面组件组件 JSX 语法
+      function MyApp() {
+        let content = isLogin ? <Login /> : <UnLogin />
+        return (
+          <div>
+            <h1 className="test" style={styleObject}>
+              {welcomeStr}
+            </h1>
+            {content}
+          </div>
+        )
+      }
+
+      // 获取一个页面根节点
+      const rootNode = document.getElementById('root')
+      // 创建一个 React 根实例
+      const root = ReactDOM.createRoot(rootNode)
+      // 使用跟实例渲染一个组件
+      root.render(React.createElement(MyApp))
+    </script>
+  </body>
+</html>
