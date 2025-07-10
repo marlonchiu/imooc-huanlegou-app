@@ -1,47 +1,37 @@
 import { useState } from 'react'
 import { useImmer } from 'use-immer'
 
-// immutable 编程规范
+// 从命令式开发到声明式开发
+// 命令式：你一步步指路，告诉出租车司机怎么回家
+// 声明式：你告诉出租车司机，你家在哪，出租车司机会自动的把车开到家门口
+
+// 1. 避免数据冗余重复
+// 2. 同类型数据尽量合并
+// 3. 数据结构能浅不深
 
 function App() {
-  const [count, setCount] = useImmer(0)
+  const [user, setUser] = useImmer({
+    firstName: '',
+    lastName: ''
+  })
 
-  const [list, setList] = useState([])
-
-  const [listOne, setListOne] = useImmer([])
-
-  function handleClickCount() {
-    // error
-    // count++
-    // setCount(count)
-    setCount((draft) => draft + 1)
+  function handleFirstNameChange(e) {
+    setUser((draft) => {
+      draft.firstName = e.target.value
+    })
   }
 
-  function handleListClick() {
-    const newList = [...list, list.length]
-    setList(newList)
-  }
-  function handleListOneClick() {
-    setListOne((draft) => {
-      draft.push(draft.length)
-      console.log(123)
+  function handleLastNameChange(e) {
+    setUser((draft) => {
+      draft.lastName = e.target.value
     })
   }
 
   return (
     <>
-      <div onClick={handleClickCount}>{count}</div>
-      <div>------------------------------------------</div>
-      <div onClick={handleListClick}>增加列表项</div>
-      {list.map((item) => {
-        return <div key={item}>{item}</div>
-      })}
-
-      <div>------------------------------------------</div>
-      <div onClick={handleListOneClick}>增加 Immer 列表项</div>
-      {listOne.map((item) => {
-        return <div key={item}>{item}</div>
-      })}
+      First Name: <input onChange={handleFirstNameChange} />
+      Last Name <input onChange={handleLastNameChange} />
+      Full Name: {user.firstName + '-' + user.lastName}
     </>
   )
 }
