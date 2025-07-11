@@ -41,7 +41,7 @@ const MockExample = () => {
     try {
       const result = await request({
         url: '/api/home',
-        method: 'GET'
+        method: 'POST'
       })
       setHomeData(result as HomeData)
       console.log('首页数据:', result)

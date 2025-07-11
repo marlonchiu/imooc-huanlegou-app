@@ -1,40 +1,41 @@
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import useRequest from '../../hooks/useRequest'
 import { LoginResponseType } from './types'
-import Modal, { ModalRefType } from '../../components/Modal'
+import { message } from '../../utils/message'
 
 const Login = () => {
   const navigate = useNavigate()
   const [phone, setPhone] = useState('')
   const [password, setPassword] = useState('')
-  const modalRef = useRef<ModalRefType>(null!)
 
   // 通过泛型传递给 useRequest 方法
-  const { request, cancel } = useRequest<LoginResponseType>()
+  const { request } = useRequest<LoginResponseType>()
 
   function handleLogin() {
     if (!phone) {
-      modalRef.current.showModal('请输入手机号码！')
+      message('请输入手机号码！')
       return
     }
     if (!password) {
-      modalRef.current.showModal('密码不能为空！')
+      message('密码不能为空！')
       return
     }
 
-    modalRef.current.showModal('登录中...')
     request({
       url: '/api/login',
       method: 'POST',
       data: { phone, password }
-    }).then((res) => {
-      if (res.data.token) {
-        localStorage.setItem('token', res.data.token)
-        navigate('/home')
-      }
     })
-    // cancel()
+      .then((res) => {
+        if (res.data.token) {
+          localStorage.setItem('token', res.data.token)
+          navigate('/home')
+        }
+      })
+      .catch((error) => {
+        message(error?.message)
+      })
   }
 
   return (
@@ -65,7 +66,6 @@ const Login = () => {
         登录
       </div>
       <div className="notice-text">*登录即表示您赞同使用条款及隐私政策</div>
-      <Modal ref={modalRef} />
     </div>
   )
 }

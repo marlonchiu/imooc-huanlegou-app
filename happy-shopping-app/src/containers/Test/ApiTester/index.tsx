@@ -15,7 +15,7 @@ const ApiTester = () => {
       method: 'POST',
       data: { phone: '13800138000', password: '123456', userName: 'test' }
     },
-    { name: '首页数据', url: '/api/home', method: 'GET' },
+    { name: '首页数据', url: '/api/home', method: 'POST' },
     { name: '热门搜索', url: '/api/hotSearch', method: 'GET' },
     { name: '搜索列表', url: '/api/searchList', method: 'GET' },
     { name: '分类标签', url: '/api/categoryTags', method: 'GET' },

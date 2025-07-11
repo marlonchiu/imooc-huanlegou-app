@@ -1,5 +1,8 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { message } from '../../utils/message'
+import useRequest from '../../hooks/useRequest'
+import { RegisterResponseType } from './types'
 
 const Register = () => {
   const navigate = useNavigate()
@@ -8,8 +11,47 @@ const Register = () => {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
 
+  const { request } = useRequest<RegisterResponseType>()
+
   function handleRegister() {
-    navigate('/home')
+    if (!userName) {
+      message('用户名不能为空！')
+      return
+    }
+    if (!phone) {
+      message('手机号不能为空！')
+      return
+    }
+    if (!password) {
+      message('密码不能为空！')
+      return
+    }
+    if (password.length < 6) {
+      message('密码长度不能小于6！')
+      return
+    }
+    if (password !== confirmPassword) {
+      message('两次密码输入不一致！')
+      return
+    }
+    request({
+      url: '/api/register',
+      method: 'POST',
+      data: {
+        userName,
+        phone,
+        password
+      }
+    })
+      .then((res) => {
+        if (res.data) {
+          message('注册成功！')
+          navigate('/account/login')
+        }
+      })
+      .catch((error) => {
+        message(error?.message)
+      })
   }
 
   return (

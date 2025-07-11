@@ -28,7 +28,7 @@ export const handlers = [
   }),
 
   // 首页数据接口
-  http.get('/api/home', () => {
+  http.post('/api/home', () => {
     return HttpResponse.json(homeData)
   }),
 
