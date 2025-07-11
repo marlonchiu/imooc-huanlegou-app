@@ -1,40 +1,38 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import axios, { AxiosRequestConfig } from 'axios'
+import useRequest from '../../hooks/useRequest'
+import { LoginResponseType } from './types'
+import Modal, { ModalRefType } from '../../components/Modal'
 
 const Login = () => {
   const navigate = useNavigate()
   const [phone, setPhone] = useState('')
   const [password, setPassword] = useState('')
+  const modalRef = useRef<ModalRefType>(null!)
 
-  // 发送请求相关状态
-  const [data, setData] = useState(null)
-  const [error, setError] = useState('')
-  const [loaded, setLoaded] = useState(false)
+  // 通过泛型传递给 useRequest 方法
+  const { request, cancel } = useRequest<LoginResponseType>()
 
   function handleLogin() {
-    axios
-      .get('/api/a.json')
-      .then((res) => {
-        console.log('🚀 ~ .then ~ res:', res)
-        setData(res.data)
-        setLoaded(true)
-      })
-      .catch((err) => {
-        console.log('🚀 ~ handleLogin ~ err:', err)
-        setError(err.message)
-        setLoaded(true)
-      })
-    // navigate('/home')
-  }
-
-  if (loaded) {
-    setLoaded(false)
-    if (data) {
-      console.log('请求成功', data)
-    } else {
-      console.log('请求失败', error)
+    if (!phone) {
+      modalRef.current.showModal('请输入手机号码！')
+      return
     }
+    if (!password) {
+      modalRef.current.showModal('密码不能为空！')
+      return
+    }
+
+    modalRef.current.showModal('登录中...')
+    request({
+      url: '/api/login',
+      method: 'POST',
+      data: { phone, password }
+    })
+    //   .then((res) => {
+    //   localStorage.setItem('token', res.data.token)
+    // })
+    cancel()
   }
 
   return (
@@ -65,6 +63,7 @@ const Login = () => {
         登录
       </div>
       <div className="notice-text">*登录即表示您赞同使用条款及隐私政策</div>
+      <Modal ref={modalRef} />
     </div>
   )
 }
