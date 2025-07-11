@@ -1,10 +1,17 @@
-import React from 'react'
+import React, { Profiler } from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './lesson37/App'
+import App from './lesson39/App'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
+
+function renderCallback(id, phase, actualDuration, baseDuration, startTime, endTime) {
+  console.log(id, phase, actualDuration, baseDuration, startTime, endTime)
+}
+
 root.render(
   <React.StrictMode>
-    <App />
+    {/* <Profiler id="app" onRender={renderCallback}> */}
+      <App />
+    {/* </Profiler> */}
   </React.StrictMode>
 )
