@@ -1,10 +1,32 @@
+import Guide from './containers/Guide'
+import Account from './containers/Account'
+import Login from './containers/Account/login'
+import Register from './containers/Account/register'
+
+import { createHashRouter, RouterProvider } from 'react-router-dom'
+
+const router = createHashRouter([
+  {
+    path: '/',
+    element: <Guide />
+  },
+  {
+    path: '/account',
+    element: <Account />,
+    children: [
+      {
+        path: 'login',
+        element: <Login />
+      },
+      {
+        path: 'register',
+        element: <Register />
+      }
+    ]
+  }
+])
+
 const App = () => {
-  return (
-    <>
-      <div className="border-bottom" style={{ fontSize: '.2rem' }}>
-        欢乐购吧欢乐购吧欢乐购吧欢乐购吧欢乐
-      </div>
-    </>
-  )
+  return <RouterProvider router={router} />
 }
 export default App

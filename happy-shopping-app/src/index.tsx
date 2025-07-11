@@ -1,3 +1,4 @@
+import 'normalize.css'
 import './styles/base.css'
 import './styles/border.css'
 
