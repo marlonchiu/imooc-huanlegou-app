@@ -1,25 +1,123 @@
-# Getting Started with Create React App
+# 欢乐购 - Happy Shopping App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+这是一个基于 React + TypeScript 的购物应用，集成了 MSW (Mock Service Worker) 来提供 mock 数据服务。
 
-## Available Scripts
+## 🚀 快速开始
 
-In the project directory, you can run:
+### 安装依赖
 
-### `npm start`
+```bash
+pnpm install
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### 启动开发服务器
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```bash
+pnpm start
+```
 
-### `npm test`
+应用将在开发模式下运行，打开 [http://localhost:3000](http://localhost:3000) 在浏览器中查看。
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+页面会在你编辑代码时自动重新加载，你也会在控制台中看到任何 lint 错误。
 
-### `npm run build`
+### 运行测试
+
+```bash
+pnpm test
+```
+
+启动交互式测试运行器。
+查看 [运行测试](https://facebook.github.io/create-react-app/docs/running-tests) 了解更多信息。
+
+## 🎯 Mock 服务功能
+
+本项目已集成 MSW (Mock Service Worker) 来提供完整的 mock 数据服务：
+
+### ✨ 特性
+
+- 🔄 自动拦截 `/api/*` 路径的请求
+- 📁 返回 `src/mock/` 目录下的 JSON 数据
+- 🌐 支持 GET 和 POST 请求
+- 🔧 只在开发环境中启用
+- 🚀 不影响其他网络请求
+
+### 📋 可用的 API 接口
+
+| 接口名称       | 请求方法 | 路径                       | 说明               |
+| -------------- | -------- | -------------------------- | ------------------ |
+| 登录           | POST     | `/api/login`               | 用户登录           |
+| 注册           | POST     | `/api/register`            | 用户注册           |
+| 首页数据       | GET      | `/api/home`                | 首页轮播图、分类等 |
+| 热门搜索       | GET      | `/api/hotSearch`           | 热门搜索关键词     |
+| 搜索列表       | GET      | `/api/searchList`          | 商品搜索结果       |
+| 分类标签       | GET      | `/api/categoryTags`        | 商品分类标签       |
+| 分类商品列表   | GET      | `/api/categoryProductList` | 分类下的商品       |
+| 商品详情       | GET      | `/api/productDetail/:id`   | 商品详细信息       |
+| 购物车         | GET      | `/api/cart`                | 购物车信息         |
+| 购物车数量     | GET      | `/api/cartCount`           | 购物车商品数量     |
+| 购物车列表     | GET      | `/api/cartList`            | 购物车商品列表     |
+| 购物车商品信息 | GET      | `/api/cartProductInfo`     | 购物车商品详情     |
+| 附近位置       | GET      | `/api/nearbyLocation`      | 附近位置信息       |
+| 附近店铺       | GET      | `/api/nearbyStore`         | 附近店铺列表       |
+
+### 🛠️ 使用方法
+
+1. **在组件中使用现有的 useRequest hook：**
+
+```typescript
+import useRequest from '../../hooks/useRequest'
+
+function MyComponent() {
+  const { request } = useRequest()
+
+  const fetchData = async () => {
+    try {
+      const result = await request({
+        url: '/api/home',
+        method: 'GET'
+      })
+      console.log('API response:', result)
+    } catch (error) {
+      console.error('API error:', error)
+    }
+  }
+
+  return <button onClick={fetchData}>获取数据</button>
+}
+```
+
+2. **测试 Mock 接口：**
+
+启动开发服务器后，访问首页可以看到：
+
+- **使用示例**：展示如何在实际组件中使用 mock 接口
+- **API 测试工具**：可以测试所有可用的 mock 接口
+
+### 📁 Mock 文件结构
+
+```
+src/mock/
+├── README.md              # Mock 服务详细说明
+├── handlers.ts            # MSW 路由处理器
+├── browser.ts             # 浏览器端 worker 配置
+├── *.json                 # 各种 mock 数据文件
+```
+
+### 🔧 添加新的 Mock 接口
+
+1. 在 `src/mock/` 目录下创建新的 JSON 文件
+2. 在 `src/mock/handlers.ts` 中添加对应的路由处理器
+
+```typescript
+// 在 handlers.ts 中添加新接口
+http.get('/api/newEndpoint', () => {
+  return HttpResponse.json(newEndpointData)
+}),
+```
+
+## 🏗️ 构建和部署
+
+### `pnpm run build`
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
