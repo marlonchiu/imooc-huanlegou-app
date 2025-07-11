@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import useRequest from '../../hooks/useRequest'
+import useRequest from '../../../hooks/useRequest'
 
 // 定义数据类型
 interface HomeData {

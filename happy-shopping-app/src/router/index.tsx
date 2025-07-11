@@ -1,5 +1,6 @@
 import { createHashRouter } from 'react-router-dom'
 
+import Test from '../containers/Test'
 import Guide from '../containers/Guide'
 import Account from '../containers/Account'
 import Login from '../containers/Account/login'
@@ -7,6 +8,10 @@ import Register from '../containers/Account/register'
 import Home from '../containers/Home'
 
 const router = createHashRouter([
+  {
+    path: '/test',
+    element: <Test />
+  },
   {
     path: '/',
     element: <Guide />
