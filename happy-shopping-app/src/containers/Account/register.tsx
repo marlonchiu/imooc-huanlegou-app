@@ -9,7 +9,7 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState('')
 
   function handleRegister() {
-    // navigate('/home')
+    navigate('/home')
   }
 
   return (

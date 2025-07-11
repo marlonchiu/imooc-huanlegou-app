@@ -1,30 +1,6 @@
-import Guide from './containers/Guide'
-import Account from './containers/Account'
-import Login from './containers/Account/login'
-import Register from './containers/Account/register'
+import { RouterProvider } from 'react-router-dom'
 
-import { createHashRouter, RouterProvider } from 'react-router-dom'
-
-const router = createHashRouter([
-  {
-    path: '/',
-    element: <Guide />
-  },
-  {
-    path: '/account',
-    element: <Account />,
-    children: [
-      {
-        path: 'login',
-        element: <Login />
-      },
-      {
-        path: 'register',
-        element: <Register />
-      }
-    ]
-  }
-])
+import router from './router'
 
 const App = () => {
   return <RouterProvider router={router} />

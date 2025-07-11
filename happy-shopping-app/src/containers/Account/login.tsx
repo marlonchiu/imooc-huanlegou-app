@@ -28,11 +28,13 @@ const Login = () => {
       url: '/api/login',
       method: 'POST',
       data: { phone, password }
+    }).then((res) => {
+      if (res.data.token) {
+        localStorage.setItem('token', res.data.token)
+        navigate('/home')
+      }
     })
-    //   .then((res) => {
-    //   localStorage.setItem('token', res.data.token)
-    // })
-    cancel()
+    // cancel()
   }
 
   return (
