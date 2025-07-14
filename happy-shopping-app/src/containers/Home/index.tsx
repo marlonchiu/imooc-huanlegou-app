@@ -47,9 +47,11 @@ function Home() {
           })
         },
         (error: any) => {
-          message(error?.message)
+          console.log(error)
+          // message(error?.message)
+          message('获取位置异常')
         },
-        { timeout: 3000 }
+        { timeout: 5000 }
       )
     }
   }, [location])
