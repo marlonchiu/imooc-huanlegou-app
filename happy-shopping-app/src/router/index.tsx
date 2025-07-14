@@ -7,6 +7,10 @@ import Login from '../containers/Account/login'
 import Register from '../containers/Account/register'
 import Home from '../containers/Home'
 
+import Nearby from '../containers/Nearby'
+import ByLocation from '../containers/Nearby/byLocation'
+import ByStore from '../containers/Nearby/byStore'
+
 const router = createHashRouter([
   {
     path: '/test',
@@ -33,6 +37,20 @@ const router = createHashRouter([
   {
     path: '/home',
     element: <Home />
+  },
+  {
+    path: '/nearby',
+    element: <Nearby />,
+    children: [
+      {
+        path: '/nearby/bylocation',
+        element: <ByLocation />
+      },
+      {
+        path: '/nearby/bystore',
+        element: <ByStore />
+      }
+    ]
   }
 ])
 

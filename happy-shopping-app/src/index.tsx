@@ -1,6 +1,7 @@
 import 'normalize.css'
 import './styles/base.css'
 import './styles/border.css'
+import './styles/common.scss'
 
 import React from 'react'
 import ReactDOM from 'react-dom/client'
