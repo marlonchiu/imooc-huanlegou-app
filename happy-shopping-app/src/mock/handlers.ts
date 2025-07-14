@@ -48,7 +48,7 @@ export const handlers = [
   }),
 
   // 分类商品列表接口
-  http.get('/api/categoryProductList', () => {
+  http.post('/api/categoryProductList', () => {
     return HttpResponse.json(categoryProductListData)
   }),
 

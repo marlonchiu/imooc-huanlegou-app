@@ -15,6 +15,7 @@ import Search from '../containers/Search'
 import SearchList from '../containers/SearchList'
 
 import Detail from '../containers/Detail'
+import Category from '../containers/Category'
 
 const router = createHashRouter([
   {
@@ -68,6 +69,10 @@ const router = createHashRouter([
   {
     path: '/detail/:id',
     element: <Detail />
+  },
+  {
+    path: '/category',
+    element: <Category />
   }
 ])
 

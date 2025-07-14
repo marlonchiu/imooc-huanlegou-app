@@ -19,7 +19,7 @@ const ApiTester = () => {
     { name: '热门搜索', url: '/api/hotSearch', method: 'GET' },
     { name: '搜索列表', url: '/api/searchList', method: 'GET' },
     { name: '分类标签', url: '/api/categoryTags', method: 'GET' },
-    { name: '分类商品列表', url: '/api/categoryProductList', method: 'GET' },
+    { name: '分类商品列表', url: '/api/categoryProductList', method: 'POST' },
     { name: '商品详情', url: '/api/productDetail', method: 'GET', params: { id: '88391' } },
     { name: '购物车', url: '/api/cart', method: 'GET' },
     { name: '购物车数量', url: '/api/cartCount', method: 'GET' },

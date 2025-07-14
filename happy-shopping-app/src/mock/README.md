@@ -20,7 +20,7 @@
 | 热门搜索 | GET | `/api/hotSearch` | `hotSearch.json` |
 | 搜索列表 | GET | `/api/searchList` | `searchList.json` |
 | 分类标签 | GET | `/api/categoryTags` | `categoryTags.json` |
-| 分类商品列表 | GET | `/api/categoryProductList` | `categoryProductList.json` |
+| 分类商品列表 | POST | `/api/categoryProductList` | `categoryProductList.json` |
 | 商品详情 | GET | `/api/productDetail` | `productDetail.json` |
 | 购物车 | GET | `/api/cart` | `cart.json` |
 | 购物车数量 | GET | `/api/cartCount` | `cartCount.json` |
