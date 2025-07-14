@@ -13,7 +13,7 @@ import type {
 } from '../../types/category'
 import type { CartChangeResponseType } from '../../types/cart'
 import Docker from '../../components/Docker'
-// import Popover from '../../components/Popover'
+import Popover from '../../components/Popover'
 import { message } from '../../utils/message'
 
 function Category() {
@@ -214,7 +214,7 @@ function Category() {
 
       <Docker activeName="category" />
 
-      {/* <Popover show={showCart} outsideClickCallback={() => setShowCart(false)}>
+      <Popover show={showCart} outsideClickCallback={() => setShowCart(false)}>
         <div className="cart">
           <div className="cart-content">
             <img src={productInfo?.imgUrl} alt="" className="cart-content-img" />
@@ -245,7 +245,7 @@ function Category() {
             <div className="cart-btn">立即购买</div>
           </div>
         </div>
-      </Popover> */}
+      </Popover>
     </div>
   )
 }
