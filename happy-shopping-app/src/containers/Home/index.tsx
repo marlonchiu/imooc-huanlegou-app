@@ -1,9 +1,12 @@
 import './style.scss'
 import { useEffect, useState } from 'react'
-import type { ResponseType } from './types'
+import type { ResponseType } from '../../types/home'
 import useRequest from '../../hooks/useRequest'
 import { message } from '../../utils/message'
 import Banner from './components/Banner'
+import Category from './components/Category'
+import Card from './components/Card'
+import Docker from '../../components/Docker'
 
 // 默认请求参数
 const defaultRequestData = {
@@ -46,7 +49,7 @@ function Home() {
         (error: any) => {
           message(error?.message)
         },
-        { timeout: 30000 }
+        { timeout: 3000 }
       )
     }
   }, [location])
@@ -55,6 +58,21 @@ function Home() {
     <div className="page home-page">
       {/* 头部轮播 */}
       <Banner location={data?.data.location} banners={data?.data.banners} />
+
+      {/* 品类 */}
+      <Category categories={data?.data.categories} />
+
+      {/* 新品尝鲜 */}
+      <Card title="新品尝鲜" list={data?.data.freshes} />
+
+      {/* 限时折扣 */}
+
+      {/* 猜你喜欢 */}
+
+      {/* 底部 */}
+      <div className="bottom">—— 我是有底线的 ——</div>
+
+      <Docker activeName="home" />
     </div>
   )
 }

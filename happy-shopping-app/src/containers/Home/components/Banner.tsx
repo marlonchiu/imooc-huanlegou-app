@@ -1,15 +1,15 @@
 import 'swiper/css'
 import { useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { BannersType, LocationType } from '../types'
+import type { LocationType, BannersType } from '../../../types/home'
 import { useNavigate } from 'react-router-dom'
 
-type bannerType = {
+type bannerPropsType = {
   location: LocationType | undefined
   banners: BannersType | undefined
 }
 
-const Banner = (props: bannerType) => {
+const Banner = (props: bannerPropsType) => {
   const { banners, location } = props
   const [index, setIndex] = useState(1)
   const navigate = useNavigate()

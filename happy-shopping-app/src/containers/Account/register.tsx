@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import type { RegisterResponseType } from './types'
+import type { RegisterResponseType } from '../../types/account'
 import useRequest from '../../hooks/useRequest'
 import { useNavigate } from 'react-router-dom'
 import { message } from '../../utils/message'
