@@ -2,14 +2,16 @@ import './style.scss'
 import { useEffect, useState, MouseEvent } from 'react'
 import useRequest from '../../hooks/useRequest'
 import { useNavigate } from 'react-router-dom'
-import {
+import type {
+  CategoryType,
+  TagType,
   CategoryTagResponseType,
-  CategoryProductListType,
   ProductType,
+  CategoryProductListResponseType,
+  CartProductType,
   CartProductResponseType,
-  CartProductType
 } from '../../types/category'
-import { CartChangeResponseType } from '../../types/cart'
+import type { CartChangeResponseType } from '../../types/cart'
 import Docker from '../../components/Docker'
 // import Popover from '../../components/Popover'
 import { message } from '../../utils/message'
@@ -18,6 +20,7 @@ function Category() {
   const navigate = useNavigate()
   const [keyword, setKeyword] = useState('')
   const [showCart, setShowCart] = useState(false)
+
   const [currentTag, setCurrentTag] = useState('')
   const [currentCategory, setCurrentCategory] = useState('')
   const [productInfo, setProductInfo] = useState<CartProductType>({
@@ -27,20 +30,21 @@ function Category() {
     price: 0,
     count: 0
   })
+
+  const [categories, setCategories] = useState<Array<CategoryType>>([])
+  const [tags, setTags] = useState<Array<TagType>>([])
   const [productList, setProductList] = useState<Array<ProductType>>([])
-  const [categories, setCategories] = useState<Array<{ id: string; name: string }>>([])
-  const [tags, setTags] = useState<string[]>([])
 
   // 获取分类
   const { request: tagRequest } = useRequest<CategoryTagResponseType>({ manual: true })
   // 获取商品
-  const { request: productRequest } = useRequest<CategoryProductListType>({ manual: true })
+  const { request: productRequest } = useRequest<CategoryProductListResponseType>({ manual: true })
   // 获取购物车信息
   const { request: cartProductRequest } = useRequest<CartProductResponseType>({ manual: true })
   // 添加购物车
   const { request: cartChangeRequest } = useRequest<CartChangeResponseType>({ manual: true })
 
-  const handleKeywordChange = (key: string, target: any) => {
+  const handleKeywordChange = (key: string, target: EventTarget & HTMLInputElement) => {
     if (key === 'Enter') {
       setKeyword(target.value)
     }
@@ -131,7 +135,7 @@ function Category() {
         <input
           className="search-input"
           placeholder="请输入商品名称"
-          onKeyDown={(e) => handleKeywordChange(e.key, e.target)}
+          onKeyDown={(e) => handleKeywordChange(e.key, e.currentTarget)}
         />
       </div>
 
