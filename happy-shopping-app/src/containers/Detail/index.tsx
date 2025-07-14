@@ -4,7 +4,7 @@ import useRequest from '../../hooks/useRequest'
 import { useNavigate, useParams } from 'react-router-dom'
 import type { DetailResponseType, CartCountResponseType } from '../../types/detail'
 import type { CartChangeResponseType } from '../../types/cart'
-// import Popover from '../../components/Popover'
+import Popover from '../../components/Popover'
 import { message } from '../../utils/message'
 
 const requestData = {
@@ -59,7 +59,7 @@ function Detail() {
 
   const addCartHandler = () => {
     cartChangeRequest({
-      url: '/api/changeCartCount',
+      url: '/api/cartCount',
       method: 'GET',
       params: { id: params.id, count: cartTempCount }
     })
@@ -125,7 +125,7 @@ function Detail() {
         </div>
       </div>
 
-      {/* <Popover show={showCart} outsideClickCallback={() => setShowCart(false)}>
+      <Popover show={showCart} outsideClickCallback={() => setShowCart(false)}>
         <div className="cart">
           <div className="cart-content">
             <img src={detail?.imgUrl} alt="" className="cart-content-img" />
@@ -155,7 +155,7 @@ function Detail() {
             </div>
           </div>
         </div>
-      </Popover> */}
+      </Popover>
     </div>
   )
 }

@@ -84,7 +84,7 @@ function Category() {
   const confirmCartHandler = () => {
     const { id, count } = productInfo
     cartChangeRequest({
-      url: '/api/changeCartCount',
+      url: '/api/cartCount',
       method: 'GET',
       params: { id, count }
     })
