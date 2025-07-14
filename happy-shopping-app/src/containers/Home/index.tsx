@@ -1,7 +1,9 @@
+import './style.scss'
 import { useEffect, useState } from 'react'
+import type { ResponseType } from './types'
 import useRequest from '../../hooks/useRequest'
-import { ResponseType } from './types'
 import { message } from '../../utils/message'
+import Banner from './components/Banner'
 
 // 默认请求参数
 const defaultRequestData = {
@@ -23,14 +25,8 @@ function Home() {
   }
 
   const [requestData, setRequestData] = useState(defaultRequestData)
-  const { request } = useRequest<ResponseType>(requestData)
-
-  useEffect(() => {
-    request(defaultRequestData).then((res) => {
-      console.log(res)
-      message(res.message, 3000)
-    })
-  }, [requestData, request])
+  const { data } = useRequest<ResponseType>(requestData)
+  console.log('🚀 ~ Home ~ data:', data)
 
   // 获取经纬度
   useEffect(() => {
@@ -48,14 +44,19 @@ function Home() {
           })
         },
         (error: any) => {
-          console.log(error?.message)
+          message(error?.message)
         },
         { timeout: 30000 }
       )
     }
   }, [location])
 
-  return <div className="page home-page">home page</div>
+  return (
+    <div className="page home-page">
+      {/* 头部轮播 */}
+      <Banner location={data?.data.location} banners={data?.data.banners} />
+    </div>
+  )
 }
 
 export default Home

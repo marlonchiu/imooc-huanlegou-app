@@ -1,8 +1,8 @@
 import { useState } from 'react'
+import type { RegisterResponseType } from './types'
+import useRequest from '../../hooks/useRequest'
 import { useNavigate } from 'react-router-dom'
 import { message } from '../../utils/message'
-import useRequest from '../../hooks/useRequest'
-import { RegisterResponseType } from './types'
 
 const Register = () => {
   const navigate = useNavigate()
@@ -11,7 +11,7 @@ const Register = () => {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
 
-  const { request } = useRequest<RegisterResponseType>()
+  const { request } = useRequest<RegisterResponseType>({ manual: true })
 
   function handleRegister() {
     if (!userName) {

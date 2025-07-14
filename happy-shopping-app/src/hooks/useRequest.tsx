@@ -1,10 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import axios, { AxiosRequestConfig } from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { message } from '../utils/message'
 
 const defaultOptions = { url: '/', method: 'GET', data: {}, params: {} }
 
-function useRequest<T>(options: AxiosRequestConfig = defaultOptions) {
+function useRequest<T>(options: AxiosRequestConfig & { manual?: boolean } = defaultOptions) {
   const [data, setData] = useState<T | null>(null!)
   const [error, setError] = useState('')
   const [loaded, setLoaded] = useState(false)
@@ -16,15 +17,15 @@ function useRequest<T>(options: AxiosRequestConfig = defaultOptions) {
     controllerRef.current.abort()
   }
 
-  const token = localStorage.getItem('token')
-  const headers = token ? { token } : {}
-
   const request = useCallback(
     (requestOptions: AxiosRequestConfig) => {
       // 清空上次请求状态
       setData(null)
       setError('')
       setLoaded(false)
+
+      const token = localStorage.getItem('token')
+      const headers = token ? { token } : {}
 
       return axios
         .request<T>({
@@ -50,6 +51,14 @@ function useRequest<T>(options: AxiosRequestConfig = defaultOptions) {
     },
     [navigate]
   )
+
+  useEffect(() => {
+    if (!options.manual) {
+      request(options).catch((error: any) => {
+        message(error?.message)
+      })
+    }
+  }, [request, options])
 
   return { data, error, loaded, request, cancel }
 }
