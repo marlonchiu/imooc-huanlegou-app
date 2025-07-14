@@ -53,7 +53,7 @@ export const handlers = [
   }),
 
   // 商品详情接口
-  http.get('/api/productDetail/:id', () => {
+  http.get('/api/productDetail', () => {
     return HttpResponse.json(productDetailData)
   }),
 
