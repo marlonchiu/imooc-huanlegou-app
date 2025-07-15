@@ -4,7 +4,7 @@ export type CartChangeResponseType = {
   data: boolean
 }
 
-type CartItemType = {
+export type CartItemType = {
   productId: string
   imgUrl: string
   weight: string

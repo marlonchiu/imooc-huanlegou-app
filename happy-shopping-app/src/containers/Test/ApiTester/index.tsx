@@ -29,7 +29,7 @@ const ApiTester = () => {
     { name: '附近店铺', url: '/api/nearbyStore', method: 'GET' },
     { name: '订单生成', url: '/api/cartSubmit', method: 'POST', data: [] },
     { name: '订单详情', url: '/api/orderDetail', method: 'GET' },
-    { name: '订单支付', url: '/api/orderPay', method: 'GET' },
+    { name: '订单支付', url: '/api/orderPay', method: 'POST' },
     { name: '用户地址', url: '/api/userAddress', method: 'GET' }
   ]
 

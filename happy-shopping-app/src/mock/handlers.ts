@@ -102,7 +102,7 @@ export const handlers = [
   }),
 
   // 订单支付接口
-  http.get('/api/orderPay', () => {
+  http.post('/api/orderPay', () => {
     return HttpResponse.json(orderPayData)
   }),
 

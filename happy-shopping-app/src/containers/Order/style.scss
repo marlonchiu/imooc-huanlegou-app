@@ -1,0 +1,226 @@
+.order-page {
+  background: #f5f9fa;
+  overflow-y: scroll;
+  padding-bottom: 0.96rem;
+
+  .title {
+    line-height: 0.44rem;
+    font-size: 0.18rem;
+    color: #242424;
+    background: #fff;
+    text-align: center;
+  }
+
+  .receiver {
+    display: flex;
+    font-size: 0.14rem;
+    background: #fff;
+    color: #242424;
+    .iconfont {
+      line-height: 0.86rem;
+      width: 0.48rem;
+      text-align: center;
+      font-size: 0.2rem;
+      color: #73d13d;
+    }
+    &-content {
+      flex: 1;
+    }
+    &-name {
+      margin: 0.14rem 0.1rem 0.06rem 0;
+    }
+    &-phone {
+      margin-left: 0.22rem;
+    }
+    &-address {
+      margin-bottom: 0.28rem;
+      font-size: 0.12rem;
+      line-height: 0.22rem;
+    }
+  }
+
+  .delivery {
+    margin-top: 0.1rem;
+    height: 0.48rem;
+    line-height: 0.48rem;
+    background: #fff;
+    font-size: 0.14rem;
+    &-text {
+      float: left;
+      margin-left: 0.1rem;
+      color: #242424;
+    }
+    &-select {
+      float: right;
+      margin-right: 0.4rem;
+      color: #b1b1b1;
+    }
+  }
+  .shop {
+    margin-top: 0.1rem;
+    &-title {
+      padding-top: 0.12rem;
+      padding-bottom: 0.04rem;
+      padding-left: 0.1rem;
+      line-height: 0.24rem;
+      font-size: 0.16rem;
+      background: #fff;
+      .iconfont {
+        margin-right: 0.08rem;
+      }
+    }
+    &-product {
+      display: flex;
+      position: relative;
+      padding: 0.1rem;
+      margin-bottom: 0.1rem;
+      background: #fff;
+      &-img {
+        display: block;
+        margin-right: 0.1rem;
+        width: 0.86rem;
+        height: 0.86rem;
+      }
+      &-content {
+        flex: 1;
+      }
+      &-title {
+        padding-top: 0.14rem;
+        color: #242424;
+        font-size: 0.14rem;
+        line-height: 0.22rem;
+        word-wrap: break-word;
+        word-break: break-all;
+      }
+      &-kilo {
+        margin-top: 0.04rem;
+        color: #b1b1b1;
+        font-size: 0.12rem;
+        line-height: 0.18rem;
+      }
+      &-order {
+        line-height: 0.24rem;
+        width: 0.75rem;
+        font-size: 0.14rem;
+        padding-top: 0.16rem;
+        color: #242424;
+        text-align: right;
+      }
+    }
+  }
+  
+  .footer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 0.64rem;
+    line-height: 0.64rem;
+    background: #fff;
+    display: flex;
+    &-total {
+      flex: 1;
+      font-size: 0.16rem;
+      margin-left: 0.1rem;
+      &-price {
+        color: #cf1322;
+        font-size: 0.18rem;
+      }
+      &-yen {
+        font-size: 0.12rem;
+        margin-right: 0.04rem;
+      }
+    }
+    &-submit {
+      margin-right: 0.16rem;
+      width: 1.43rem;
+      height: 0.44rem;
+      line-height: 0.44rem;
+      margin-top: 0.1rem;
+      border-radius: 0.22rem;
+      background: #73d13d;
+      text-align: center;
+      color: #fff;
+      font-size: 0.16rem;
+    }
+  }
+  .address-popover {
+    padding: 0 0.16rem 0.1rem 0.16rem;
+    font-size: 0.16rem;
+    color: #242424;
+    &-title {
+      line-height: 0.48rem;
+      text-align: center;
+      font-size: 0.14rem;
+    }
+    .address-item {
+      &-name {
+        margin: 0.18rem 0 0.08rem 0;
+      }
+      &-phone {
+        margin-left: 0.32rem;
+      }
+      &-address {
+        margin-bottom: 0.28rem;
+        font-size: 0.14rem;
+        line-height: 0.22rem;
+        color: #bbb;
+      }
+    }
+  }
+  .payment-popover {
+    color: #242424;
+    font-size: 0.14rem;
+    &-title {
+      text-align: center;
+      line-height: 0.16rem;
+      margin-top: 0.14rem;
+      margin-bottom: 0.4rem;
+    }
+    &-price {
+      color: #52c41a;
+      font-size: 0.24rem;
+      line-height: 0.28rem;
+      text-align: center;
+    }
+    &-products {
+      margin: 0 0.16rem 0.3rem 0.16rem;
+    }
+    &-product {
+      position: relative;
+      height: 0.48rem;
+      line-height: 0.48rem;
+    }
+    &-img {
+      display: block;
+      float: left;
+      width: 0.28rem;
+      height: 0.28rem;
+      margin-top: 0.1rem;
+      margin-right: 0.18rem;
+    }
+    &-button {
+      margin: 0.1rem 0.16rem;
+      height: 0.44rem;
+      line-height: 0.44rem;
+      background: #73d13d;
+      border-radius: 0.22rem;
+      text-align: center;
+      color: #fff;
+    }
+  }
+  .radio {
+    position: absolute;
+    right: 0.1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0.24rem;
+    height: 0.24rem;
+    border-radius: 0.12rem;
+    border: 0.01rem solid #b1b1b1;
+    &-active {
+      background: #73d13d;
+      border: none;
+    }
+  }
+}
