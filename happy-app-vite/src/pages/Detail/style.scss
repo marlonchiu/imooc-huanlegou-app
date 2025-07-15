@@ -1,0 +1,193 @@
+.detail-page {
+  padding-bottom: 0.74rem;
+  background-color: #f5f9fa;
+  height: auto;
+
+  &-header {
+    position: relative;
+    padding: 0 0.32rem 0 0.48rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    height: 0.44rem;
+    width: 100%;
+    box-sizing: border-box;
+
+    .back-icon {
+      position: absolute;
+      left: 0.1rem;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    span {
+      font-size: 0.18rem;
+      line-height: 0.21rem;
+      color: #242424;
+    }
+  }
+
+  img {
+    width: 100vw;
+    height: 100vw;
+  }
+
+  .main {
+    position: relative;
+    margin: 0.17rem 0.1rem 0.1rem;
+    border-radius: 0.15rem;
+    background-color: #52c41a;
+    padding-top: 0.74rem;
+    &-price,
+    &-sales {
+      position: absolute;
+      font-weight: bold;
+      color: #fff;
+    }
+    &-price {
+      top: 0.08rem;
+      left: 0.08rem;
+      line-height: 0.38rem;
+      font-size: 0.2rem;
+      .yen {
+        margin-right: 0.04rem;
+        font-size: 0.14rem;
+        font-weight: 400;
+      }
+    }
+    &-sales {
+      top: 0.16rem;
+      right: 0.17rem;
+      font-size: 0.18rem;
+    }
+    &-content {
+      margin-top: -0.18rem;
+      padding: 0.2rem 0.1rem 0.1rem;
+      border-radius: 0.15rem;
+      background-color: #fff;
+      font-size: 0.18rem;
+
+      &-title {
+        font-size: 0.18rem;
+        line-height: 0.27rem;
+        color: #242424;
+      }
+
+      &-desc {
+        margin-top: 0.06rem;
+        font-size: 0.14rem;
+        line-height: 0.2rem;
+        color: #c9cdd4;
+      }
+    }
+  }
+
+  .spec,
+  .detail {
+    margin: 0 0.1rem 0.1rem;
+    padding: 0.09rem 0.1rem;
+    border-radius: 0.15rem;
+    background-color: #fff;
+    &-title {
+      font-size: 0.16rem;
+      line-height: 0.2rem;
+      color: #242424;
+    }
+  }
+
+  .spec {
+    &-content {
+      margin-top: 0.1rem;
+      display: flex;
+      border-radius: 0.05rem;
+      border: 0.01rem solid #d7d7d7;
+      &-left,
+      &-right {
+        padding: 0.04rem 0;
+        display: flex;
+        flex-direction: column;
+      }
+      &-left {
+        align-items: center;
+        justify-content: center;
+        width: 0.6rem;
+        border-radius: 0.05rem 0 0 0.05rem;
+        background-color: #f2f3f5;
+      }
+      &-right {
+        flex: 1;
+        padding-left: 0.1rem;
+      }
+      &-item {
+        font-size: 0.14rem;
+        line-height: 0.2rem;
+        color: #242424;
+      }
+    }
+  }
+
+  .detail {
+    &-content {
+      margin-top: 0.2rem;
+      padding: 0 0.07rem;
+      font-size: 0.16rem;
+      line-height: 0.27rem;
+      color: #242424;
+    }
+  }
+
+  .docker {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    padding: 0.1rem 0.16rem;
+    height: 0.64rem;
+    box-sizing: border-box;
+    background-color: #fff;
+
+    .cart {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      &-icon {
+        font-size: 0.32rem;
+      }
+      &-title {
+        font-size: 0.11rem;
+        line-height: 0.16rem;
+        color: #242424;
+      }
+      &-count {
+        position: absolute;
+        top: -0.06rem;
+        right: 0.32rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 0.16rem;
+        height: 0.16rem;
+        background-color: #73d13d;
+        border-radius: 50%;
+        font-size: 0.11rem;
+        color: #fff;
+      }
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.39rem;
+      border-radius: 0.22rem;
+      background: #73d13d;
+      font-size: 0.16rem;
+      color: #fff;
+    }
+  }
+}

@@ -1,0 +1,108 @@
+.popover {
+  &-mask {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #000;
+    opacity: 0.5;
+    z-index: 99;
+  }
+  
+  &-content {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #fff;
+    border-radius: 0.1rem 0.1rem 0 0;
+    z-index: 100;
+
+    .cart {
+      margin: 0 0.16rem;
+      &-content {
+        margin: 0.2rem 0 0;
+        padding: 0 0.04rem 0.34rem;
+        display: flex;
+        border-bottom: 0.01rem solid #f4f4f4;
+        &-img {
+          width: 0.7rem;
+          height: 0.7rem;
+        }
+        &-info {
+          margin-left: 0.47rem;
+          flex: 1;
+        }
+        &-title {
+          width: 1.73rem;
+          font-size: 0.12rem;
+          line-height: 0.18rem;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: normal;
+          color: #242424;
+        }
+        &-price {
+          margin-top: 0.15rem;
+          font-size: 0.14rem;
+          line-height: 0.18rem;
+          color: #f81c00;
+          .yen {
+            margin-right: 0.02rem;
+            font-size: 0.12rem;
+          }
+        }
+      }
+      &-count {
+        padding: 0.32rem 0 0.33rem;
+        display: flex;
+        align-items: center;
+        &-title {
+          font-size: 0.14rem;
+          line-height: 0.21rem;
+          color: #242424;
+        }
+        &-counter {
+          margin-left: auto;
+          display: flex;
+        }
+        &-button,
+        &-text {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 0.28rem;
+          height: 0.28rem;
+          font-size: 0.18rem;
+          background-color: #f4f4f4;
+          color: #242424;
+        }
+        &-text {
+          margin: 0 0.1rem;
+        }
+      }
+      &-btns {
+        display: flex;
+        margin: 0.1rem 0;
+      }
+      &-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+        height: 0.44rem;
+        background-color: #73d13d;
+        border-radius: 0.22rem;
+        font-size: 0.16rem;
+        color: #fff;
+        + .cart-btn {
+          margin-left: 0.23rem;
+        }
+      }
+    }
+  }
+}

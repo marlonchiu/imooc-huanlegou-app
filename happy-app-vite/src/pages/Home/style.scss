@@ -1,0 +1,182 @@
+.home-page {
+  padding-bottom: 0.79rem;
+  overflow-y: scroll;
+  background-color: #f5f9fa;
+  .banner {
+    padding: 0 0.14rem 0.38rem;
+    background: #73d13d;
+
+    .location {
+      padding-top: 0.15rem;
+      display: flex;
+      align-items: center;
+      height: 0.24rem;
+      font-size: 0.16rem;
+      color: #fff;
+
+      .iconfont {
+        margin-right: 0.1rem;
+        font-size: 0.18rem;
+      }
+    }
+
+    .search {
+      display: flex;
+      align-items: center;
+      margin-top: 0.15rem;
+      padding: 0 0.12rem;
+      background: #fff;
+      height: 0.36rem;
+      border-radius: 0.2rem;
+      font-size: 0.12rem;
+      color: #808080;
+
+      .iconfont {
+        margin-right: 0.09rem;
+        color: #75818f;
+      }
+    }
+
+    .swiper-area {
+      position: relative;
+      margin: 0.2rem 0 0 0.03rem;
+      .swiper {
+        height: 1rem;
+        img {
+          width: 3.4rem;
+          height: 0.9rem;
+        }
+      }
+
+      .pagination {
+        position: absolute;
+        left: 50%;
+        bottom: 0.04rem;
+        padding: 0 0.06rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 0.18rem;
+        border-radius: 0.2rem;
+        background: #52c41a;
+        font-size: 0.12rem;
+        color: #fff;
+        transform: translate(-50%, -50%);
+        z-index: 99;
+      }
+    }
+  }
+
+  .category {
+    position: relative;
+    margin-top: -0.2rem;
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 0.12rem;
+    height: 1.9rem;
+    background: #fff;
+    border-radius: 0.2rem 0.2rem 0 0;
+
+    &-item {
+      flex: 0 0 25%;
+      text-align: center;
+
+      img {
+        margin-top: 0.16rem;
+        margin-bottom: 0.13rem;
+        width: 0.42rem;
+        height: 0.36rem;
+      }
+    }
+  }
+
+  .card {
+    margin-top: 0.1rem;
+    padding: 0.14rem;
+    background: #fff;
+    &-header {
+      display: flex;
+      align-items: center;
+      img {
+        margin-right: 0.08rem;
+        width: 0.16rem;
+        height: 0.21rem;
+      }
+      .title {
+        font-size: 0.2rem;
+        line-height: 0.23rem;
+        color: #242424;
+      }
+      .more {
+        display: flex;
+        align-items: center;
+        margin-left: auto;
+        font-size: 0.12rem;
+        line-height: 0.18rem;
+        color: #242424;
+        .iconfont {
+          margin-left: 0.05rem;
+          font-size: 0.14rem;
+        }
+      }
+    }
+
+    &-content {
+      display: flex;
+      margin-top: 0.19rem;
+      padding-bottom: 0.14rem;
+      overflow-x: scroll;
+      height: 1.82rem;
+      &-item {
+        display: flex;
+        width: 1.1rem;
+        flex-direction: column;
+        img {
+          width: 1.1rem;
+          height: 1.1rem;
+        }
+        &-name {
+          margin: 0.06rem;
+          font-size: 0.12rem;
+          line-height: 0.18rem;
+          white-space: normal;
+          word-break: break-all;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2; /* 定义显示的行数 */
+          overflow: hidden;
+          text-overflow: ellipsis;
+          color: #242424;
+        }
+        &-operate {
+          margin: 0 0.06rem;
+          display: flex;
+          align-items: center;
+          .yen {
+            margin-right: 0.02rem;
+            font-size: 0.12rem;
+            line-height: 0.24rem;
+            color: #f81c00;
+          }
+          .price {
+            font-size: 0.2rem;
+            line-height: 0.24rem;
+            color: #f81c00;
+          }
+          .iconfont {
+            margin-left: auto;
+            font-size: 0.18rem;
+            color: #73d13d;
+          }
+        }
+      }
+    }
+  }
+
+  .bottom {
+    margin-top: 0.5rem;
+    text-align: center;
+    font-size: 0.12rem;
+    color: #b3c1c4;
+  }
+}

@@ -1,0 +1,23 @@
+.mine-page {
+  background: #f5f9fa;
+  overflow-y: scroll;
+  padding-bottom: 0.96rem;
+
+  .title {
+    line-height: 0.44rem;
+    font-size: 0.18rem;
+    color: #242424;
+    background: #fff;
+    text-align: center;
+  }
+
+  .logout-btn {
+    margin: 0.1rem 0.16rem;
+    height: 0.44rem;
+    line-height: 0.44rem;
+    background: #73d13d;
+    border-radius: 0.22rem;
+    text-align: center;
+    color: #fff;
+  }
+}

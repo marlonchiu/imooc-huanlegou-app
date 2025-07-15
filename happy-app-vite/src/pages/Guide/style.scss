@@ -1,0 +1,42 @@
+.guide-page {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background: #fff;
+  opacity: 0;
+  transition: all 3s;
+
+  .guide-icon {
+    display: block;
+    margin: 0 auto;
+    padding: 0.93rem 0 0.29rem 0;
+    width: 0.86rem;
+    height: 0.7rem;
+  }
+
+  .guide-title {
+    font-size: 0.2rem;
+    line-height: 0.23rem;
+    letter-spacing: 0rem;
+    text-align: center;
+    color: #242424;
+  }
+
+  .slogan-icon {
+    display: block;
+    margin: 0 auto;
+    padding-top: 1.73rem;
+    width: 2.02rem;
+    height: 1.18rem;
+  }
+
+  .iconfont {
+    position: absolute;
+    left: 50%;
+    bottom: 0.73rem;
+    text-align: center;
+    font-size: 0.2rem;
+    color: #73d13d;
+    transform: translate(-50%, 0);
+  }
+}

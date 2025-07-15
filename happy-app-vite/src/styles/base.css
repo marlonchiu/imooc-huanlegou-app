@@ -1,0 +1,40 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* 1rem 等于 html fontSize 的大小 */
+html {
+  font-size: 100px;
+}
+
+/* 在线链接服务仅供平台体验和调试使用，平台不承诺服务的稳定性，企业客户需下载字体包自行发布使用并做好备份。 */
+@font-face {
+  font-family: 'iconfont'; /* Project id 4690127 */
+  src: url('//at.alicdn.com/t/c/font_4690127_1evoos54lnh.woff2?t=1732441009074') format('woff2'),
+    url('//at.alicdn.com/t/c/font_4690127_1evoos54lnh.woff?t=1732441009074') format('woff'),
+    url('//at.alicdn.com/t/c/font_4690127_1evoos54lnh.ttf?t=1732441009074') format('truetype');
+}
+
+.iconfont {
+  font-family: 'iconfont' !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+}
+
+input::-webkit-autofill,
+input::-webkit-autofill:hover,
+input::-webkit-autofill:focus,
+input::-webkit-autofill:active {
+  -webkit-transition-delay: 99999s;
+  -webkit-transition: color 99999s ease-out, background-color 99999s ease-out;
+}
