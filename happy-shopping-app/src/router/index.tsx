@@ -18,6 +18,7 @@ import Detail from '../containers/Detail'
 import Category from '../containers/Category'
 import Cart from '../containers/Cart'
 import Order from '../containers/Order'
+import Mine from '../containers/Mine'
 
 const router = createHashRouter([
   {
@@ -83,6 +84,10 @@ const router = createHashRouter([
   {
     path: '/order/:id',
     element: <Order />
+  },
+  {
+    path: '/mine',
+    element: <Mine />
   }
 ])
 
