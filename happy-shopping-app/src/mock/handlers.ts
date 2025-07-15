@@ -16,6 +16,9 @@ import cartProductInfoData from './cartProductInfo.json'
 import nearbyLocationData from './nearbyLocation.json'
 import nearbyStoreData from './nearbyStore.json'
 import cartSubmitData from './cartSubmit.json'
+import orderDetailData from './orderDetail.json'
+import orderPayData from './orderPay.json'
+import userAddressData from './userAddress.json'
 
 export const handlers = [
   // 登录接口
@@ -91,5 +94,20 @@ export const handlers = [
   // 订单生成接口
   http.post('/api/cartSubmit', () => {
     return HttpResponse.json(cartSubmitData)
+  }),
+
+  // 订单详情接口
+  http.get('/api/orderDetail', () => {
+    return HttpResponse.json(orderDetailData)
+  }),
+
+  // 订单支付接口
+  http.get('/api/orderPay', () => {
+    return HttpResponse.json(orderPayData)
+  }),
+
+  // 用户地址接口
+  http.get('/api/userAddress', () => {
+    return HttpResponse.json(userAddressData)
   }),
 ]
