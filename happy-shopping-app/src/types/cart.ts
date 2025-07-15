@@ -25,3 +25,15 @@ export type CartListResponseType = {
   message: string
   data: Array<ShopListItemType>
 }
+
+export type CartSubmitProductType = Array<{
+  productId: string
+  count: number
+}>
+
+export type CartSubmitResponseType = {
+  message: string
+  data: {
+    orderId: string
+  }
+}

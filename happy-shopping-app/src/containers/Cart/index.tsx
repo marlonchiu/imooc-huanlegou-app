@@ -1,18 +1,28 @@
 import './style.scss'
 import { useEffect, useState } from 'react'
-import { ShopListItemType, CartListResponseType } from '../../types/cart'
+import type {
+  ShopListItemType,
+  CartListResponseType,
+  CartSubmitProductType,
+  CartSubmitResponseType
+} from '../../types/cart'
 import useRequest from '../../hooks/useRequest'
 import Docker from '../../components/Docker'
 import { message } from '../../utils/message'
+import { useNavigate } from 'react-router-dom'
 
 function Cart() {
+  const navigate = useNavigate()
   const [cartList, setCartList] = useState<ShopListItemType[]>([])
   const [allChecked, setAllChecked] = useState(false)
+  const [totalCount, setTotalCount] = useState(0)
+  const [totalPrice, setTotalPrice] = useState(0)
 
-  const { request } = useRequest<CartListResponseType>({ manual: true })
+  const { request: cartListRequest } = useRequest<CartListResponseType>({ manual: true })
+  const { request: cartSubmitRequest } = useRequest<CartSubmitResponseType>({ manual: true })
 
   useEffect(() => {
-    request({
+    cartListRequest({
       url: '/api/cartList',
       method: 'GET'
     })
@@ -28,12 +38,37 @@ function Cart() {
       .catch((e) => {
         message(e.message)
       })
-  }, [request])
+  }, [cartListRequest])
 
   useEffect(() => {
     // 存在未全选的情况
     const notAllChecked = cartList.find((shop) => !shop.isChecked)
     setAllChecked(!notAllChecked)
+  }, [cartList])
+
+  // 计算购物车总价
+  useEffect(() => {
+    console.log('计算购物车总价')
+
+    const calcCount = cartList.reduce((total, shop) => {
+      return (
+        total +
+        shop.cartList.reduce((total, item) => {
+          return total + (item.isChecked ? Number(item.count) : 0)
+        }, 0)
+      )
+    }, 0)
+
+    const calcPrice = cartList.reduce((total, shop) => {
+      return (
+        total +
+        shop.cartList.reduce((total, item) => {
+          return total + (item.isChecked ? Number(item.price) * Number(item.count) : 0)
+        }, 0)
+      )
+    }, 0)
+    setTotalCount(calcCount)
+    setTotalPrice(Number(calcPrice.toFixed(2)))
   }, [cartList])
 
   const handleCountChange = (shopId: string, productId: string, count: string) => {
@@ -87,6 +122,40 @@ function Cart() {
     setCartList(newCartList)
   }
 
+  const handleCartSubmit = () => {
+    if (!totalCount) {
+      message('您没有勾选任何购物车中的商品，无法创建订单~')
+      return
+    }
+
+    const params: CartSubmitProductType = []
+    cartList.forEach((shop) => {
+      shop.cartList.forEach((product) => {
+        if (product.isChecked) {
+          params.push({
+            productId: product.productId,
+            count: product.count
+          })
+        }
+      })
+    })
+    console.log(params)
+
+    cartSubmitRequest({
+      url: '/api/cartSubmit',
+      method: 'POST',
+      data: params
+    })
+      .then((res) => {
+        message('下单成功')
+        const { orderId } = res.data
+        navigate(`/order/${orderId}`)
+      })
+      .catch((e) => {
+        message(e.message)
+      })
+  }
+
   return (
     <div className="page cart-page">
       <div className="cart-page-header flex-row flex-center">购物车</div>
@@ -124,7 +193,8 @@ function Cart() {
                         <input
                           value={cartItem.count}
                           className="product-operate-input"
-                          onChange={(e) => handleCountChange(shop.shopId, cartItem.productId, e.target.value)}
+                          onChange={(event) => handleCountChange(shop.shopId, cartItem.productId, event?.target.value)}
+                          onClick={(event) => event.stopPropagation()}
                         />
                         {/* <span className="product-operate-item flex-row flex-center">+</span> */}
                       </div>
@@ -144,10 +214,12 @@ function Cart() {
           <span className="total-text">合计：</span>
           <div className="total-price">
             <span className="yen">&yen;</span>
-            <span>158</span>
+            <span>{totalPrice}</span>
           </div>
         </div>
-        <div className="settle-btn flex-row flex-center">结算（2）</div>
+        <div className="settle-btn flex-row flex-center" onClick={handleCartSubmit}>
+          结算（{totalCount}）
+        </div>
       </div>
 
       <Docker activeName="cart" />

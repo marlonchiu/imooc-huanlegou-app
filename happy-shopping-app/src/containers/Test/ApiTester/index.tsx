@@ -26,7 +26,8 @@ const ApiTester = () => {
     { name: '购物车列表', url: '/api/cartList', method: 'GET' },
     { name: '购物车商品信息', url: '/api/cartProductInfo', method: 'GET' },
     { name: '附近位置', url: '/api/nearbyLocation', method: 'GET' },
-    { name: '附近店铺', url: '/api/nearbyStore', method: 'GET' }
+    { name: '附近店铺', url: '/api/nearbyStore', method: 'GET' },
+    { name: '订单生成', url: '/api/cartSubmit', method: 'POST', data: [] }
   ]
 
   const testApi = async (api: any) => {

@@ -15,6 +15,7 @@ import cartListData from './cartList.json'
 import cartProductInfoData from './cartProductInfo.json'
 import nearbyLocationData from './nearbyLocation.json'
 import nearbyStoreData from './nearbyStore.json'
+import cartSubmitData from './cartSubmit.json'
 
 export const handlers = [
   // 登录接口
@@ -85,5 +86,10 @@ export const handlers = [
   // 附近店铺接口
   http.get('/api/nearbyStore', () => {
     return HttpResponse.json(nearbyStoreData)
+  }),
+
+  // 订单生成接口
+  http.post('/api/cartSubmit', () => {
+    return HttpResponse.json(cartSubmitData)
   }),
 ]
