@@ -88,6 +88,10 @@ const router = createHashRouter([
   {
     path: '/mine',
     element: <Mine />
+  },
+  {
+    path: '*',
+    element: <Home />
   }
 ])
 
