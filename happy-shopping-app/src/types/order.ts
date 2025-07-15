@@ -18,7 +18,7 @@ export type ResponseDataType = {
   money: number
   timeRange: Array<TimeType>
   address: AddressItemType
-  time: [string, string, string]
+  time: string[]
   total: number
   shop: Array<ShopListItemType>
 }

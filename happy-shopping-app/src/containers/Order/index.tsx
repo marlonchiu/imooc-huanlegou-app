@@ -8,7 +8,7 @@ import type {
 } from '../../types/order'
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-// import { Picker } from 'antd-mobile'
+import { Picker } from 'antd-mobile'
 
 import useRequest from '../../hooks/useRequest'
 import { message } from '../../utils/message'
@@ -216,7 +216,9 @@ function Order() {
           </div>
         </div>
       </Popover>
-      {/* <Picker
+
+      {/* 时间选择器 */}
+      <Picker
         columns={orderData.timeRange || []}
         visible={showTimeRange}
         onClose={() => {
@@ -224,14 +226,14 @@ function Order() {
         }}
         value={orderData?.time}
         onConfirm={(value) => {
-          if (data) {
-            const newData = { ...data }
+          if (orderData) {
+            const newData = { ...orderData }
             newData.time = value as string[]
             setOrderData(newData)
           }
           setShowTimeRange(false)
         }}
-      /> */}
+      />
     </div>
   ) : null
 }
