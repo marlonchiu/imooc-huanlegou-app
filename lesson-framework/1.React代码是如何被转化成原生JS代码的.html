@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>11-1 React 代码是如何被转化成原生 JS 代码的</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      // React 代码
+      // const element = <div title="Hello Welcome">Content</div>
+      // const container = document.getElementById('root')
+      // ReactDom.render(element, container)
+
+      // const element = <div title="Hello Welcome">Content</div>
+
+      // 1。JSX代码会被 Babel 转化成下面的代码
+      // const element = React.createElement(
+      //   'div',
+      //   {title: "Hello welcome"},
+      //   "Content"
+      // );
+
+      // 2.React.createElement 会把 element 转化成下面的结构
+      const element = {
+        type: 'div',
+        props: {
+          title: 'Hello welcome',
+          children: 'content'
+        }
+      }
+      const container = document.getElementById('root')
+
+      // 3.ReactDom.render 会进行如下操作
+      // ReactDom.render(element, container)
+      const node = document.createElement(element.type)
+      node['title'] = element.props.title
+      const text = document.createTextNode('')
+      text['nodeValue'] = element.props.children
+      node.appendChild(text)
+      container.appendChild(node)
+    </script>
+  </body>
+</html>
