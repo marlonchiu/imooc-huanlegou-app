@@ -9,7 +9,7 @@ import type {
   ProductType,
   CategoryProductListResponseType,
   CartProductType,
-  CartProductResponseType,
+  CartProductResponseType
 } from '../../types/category'
 import type { CartChangeResponseType } from '../../types/cart'
 import Docker from '../../components/Docker'
@@ -88,7 +88,7 @@ function Category() {
       method: 'GET',
       params: { id, count }
     })
-      .then((res) => {
+      .then((_res) => {
         setShowCart(false)
       })
       .catch((e) => {

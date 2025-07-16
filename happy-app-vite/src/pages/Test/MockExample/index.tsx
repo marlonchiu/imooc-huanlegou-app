@@ -82,7 +82,7 @@ const MockExample = () => {
         }
       })
       console.log('登录结果:', result)
-      const loginResult = result as any
+      const loginResult = result as { data: { token: string } }
       alert('登录成功！Token: ' + loginResult.data.token)
     } catch (error) {
       console.error('登录失败:', error)

@@ -1,6 +1,7 @@
 import 'swiper/css'
 import { useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import type { Swiper as SwiperType } from 'swiper'
 import type { LocationType, BannersType } from '../../../types/home'
 import { useNavigate } from 'react-router-dom'
 
@@ -38,7 +39,11 @@ const Banner = (props: bannerPropsType) => {
 
       {/* 轮播图 */}
       <div className="swiper-area">
-        <Swiper spaceBetween={0} slidesPerView={1} onSlideChange={(e: any) => setIndex(e.activeIndex + 1)}>
+        <Swiper
+          spaceBetween={0}
+          slidesPerView={1}
+          onSlideChange={(swiper: SwiperType) => setIndex(swiper.activeIndex + 1)}
+        >
           {(banners || []).map((item) => {
             return (
               <SwiperSlide key={item.id}>

@@ -6,7 +6,7 @@ import { message } from '../utils/message'
 const defaultOptions = { url: '/', method: 'GET', data: {}, params: {} }
 
 function useRequest<T>(options: AxiosRequestConfig & { manual?: boolean } = defaultOptions) {
-  const [data, setData] = useState<T | null>(null!)
+  const [data, setData] = useState<T | null>(null)
   const [error, setError] = useState('')
   const [loaded, setLoaded] = useState(false)
 
@@ -37,13 +37,20 @@ function useRequest<T>(options: AxiosRequestConfig & { manual?: boolean } = defa
           setData(response.data)
           return response.data
         })
-        .catch((error: any) => {
-          if (error?.response?.status === 403) {
-            localStorage.removeItem('token')
-            navigate('/account/login')
+        .catch((error: unknown) => {
+          if (error && typeof error === 'object' && 'response' in error) {
+            const axiosError = error as { response?: { status?: number } }
+            if (axiosError.response?.status === 403) {
+              localStorage.removeItem('token')
+              navigate('/account/login')
+            }
           }
-          setError(error.message || 'unknown request error')
-          throw new Error(error)
+          const errorMessage =
+            error && typeof error === 'object' && 'message' in error
+              ? (error as { message: string }).message
+              : 'unknown request error'
+          setError(errorMessage)
+          throw error
         })
         .finally(() => {
           setLoaded(true)
@@ -54,8 +61,12 @@ function useRequest<T>(options: AxiosRequestConfig & { manual?: boolean } = defa
 
   useEffect(() => {
     if (!options.manual) {
-      request(options).catch((error: any) => {
-        message(error?.message)
+      request(options).catch((error: unknown) => {
+        const errorMessage =
+          error && typeof error === 'object' && 'message' in error
+            ? (error as { message: string }).message
+            : 'unknown error'
+        message(errorMessage)
       })
     }
   }, [request, options])

@@ -1,9 +1,17 @@
 import { useState } from 'react'
+import type { ReactElement } from 'react'
 import useRequest from '../../../hooks/useRequest'
 
-const ApiTester = () => {
+interface ApiItem {
+  name: string
+  url: string
+  method: string
+  data?: unknown
+}
+
+const ApiTester = (): ReactElement => {
   const [selectedApi, setSelectedApi] = useState('')
-  const [response, setResponse] = useState<any>(null)
+  const [response, setResponse] = useState<unknown>(null)
   const [loading, setLoading] = useState(false)
   const { request } = useRequest()
 
@@ -33,7 +41,7 @@ const ApiTester = () => {
     { name: '用户地址', url: '/api/userAddress', method: 'GET' }
   ]
 
-  const testApi = async (api: any) => {
+  const testApi = async (api: ApiItem) => {
     setLoading(true)
     setSelectedApi(api.name)
     setResponse(null)
@@ -54,62 +62,69 @@ const ApiTester = () => {
     }
   }
 
+  const renderApiButtons = () => (
+    <div style={{ marginBottom: '20px' }}>
+      <h3>可用的API接口:</h3>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '10px' }}>
+        {apiList.map((api, index) => (
+          <button
+            key={index}
+            onClick={() => testApi(api)}
+            disabled={loading}
+            style={{
+              padding: '10px',
+              border: '1px solid #ddd',
+              borderRadius: '4px',
+              backgroundColor: selectedApi === api.name ? '#007bff' : '#f8f9fa',
+              color: selectedApi === api.name ? 'white' : '#333',
+              cursor: loading ? 'not-allowed' : 'pointer',
+              fontSize: '14px'
+            }}
+          >
+            {api.name}
+            <br />
+            <small style={{ opacity: 0.8 }}>
+              {api.method} {api.url}
+            </small>
+          </button>
+        ))}
+      </div>
+    </div>
+  )
+
+  const renderLoading = () =>
+    loading ? (
+      <div style={{ textAlign: 'center', padding: '20px' }}>
+        <p>正在请求 {selectedApi} ...</p>
+      </div>
+    ) : null
+
+  const renderResponse = () =>
+    response ? (
+      <div style={{ marginTop: '20px' }}>
+        <h3>响应结果 ({selectedApi}):</h3>
+        <pre
+          style={{
+            background: '#f5f5f5',
+            padding: '15px',
+            borderRadius: '4px',
+            fontSize: '12px',
+            overflow: 'auto',
+            maxHeight: '400px',
+            border: '1px solid #ddd'
+          }}
+        >
+          {JSON.stringify(response, null, 2)}
+        </pre>
+      </div>
+    ) : null
+
   return (
     <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
       <h2>Mock API 测试工具</h2>
-
-      <div style={{ marginBottom: '20px' }}>
-        <h3>可用的API接口:</h3>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '10px' }}>
-          {apiList.map((api, index) => (
-            <button
-              key={index}
-              onClick={() => testApi(api)}
-              disabled={loading}
-              style={{
-                padding: '10px',
-                border: '1px solid #ddd',
-                borderRadius: '4px',
-                backgroundColor: selectedApi === api.name ? '#007bff' : '#f8f9fa',
-                color: selectedApi === api.name ? 'white' : '#333',
-                cursor: loading ? 'not-allowed' : 'pointer',
-                fontSize: '14px'
-              }}
-            >
-              {api.name}
-              <br />
-              <small style={{ opacity: 0.8 }}>
-                {api.method} {api.url}
-              </small>
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {loading && (
-        <div style={{ textAlign: 'center', padding: '20px' }}>
-          <p>正在请求 {selectedApi} ...</p>
-        </div>
-      )}
-
-      {response && (
-        <div style={{ marginTop: '20px' }}>
-          <h3>响应结果 ({selectedApi}):</h3>
-          <pre
-            style={{
-              background: '#f5f5f5',
-              padding: '15px',
-              borderRadius: '4px',
-              fontSize: '12px',
-              overflow: 'auto',
-              maxHeight: '400px',
-              border: '1px solid #ddd'
-            }}
-          >
-            {JSON.stringify(response, null, 2)}
-          </pre>
-        </div>
-      )}
+      {renderApiButtons()}
+      {renderLoading()}
+      {renderResponse()}
     </div>
   )
 }

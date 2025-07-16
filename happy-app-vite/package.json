@@ -2,6 +2,7 @@
   "name": "happy-app-vite",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
     "@testing-library/react": "^16.3.0",
@@ -29,6 +30,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.31.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@types/node": "^20.19.8",
     "@typescript-eslint/eslint-plugin": "^8.37.0",
@@ -38,9 +40,11 @@
     "eslint": "^9.31.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
+    "globals": "^16.3.0",
     "jsdom": "^26.1.0",
     "msw": "^2.10.3",
     "vite": "^7.0.4",
+    "vite-plugin-compression": "^0.5.1",
     "vitest": "^3.2.4"
   },
   "msw": {

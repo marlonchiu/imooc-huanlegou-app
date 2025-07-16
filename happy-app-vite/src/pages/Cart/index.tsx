@@ -86,28 +86,32 @@ function Cart() {
   const handleShopClick = (shopId: string) => {
     const newCartList = [...cartList]
     const shop = newCartList.find((shop) => shop.shopId === shopId)
-    shop!.isChecked = !shop?.isChecked
-    shop?.cartList.forEach((product) => {
-      product.isChecked = !product.isChecked
-    })
-    setCartList(newCartList)
+    if (shop) {
+      shop.isChecked = !shop.isChecked
+      shop.cartList.forEach((product) => {
+        product.isChecked = !product.isChecked
+      })
+      setCartList(newCartList)
+    }
   }
 
   // 商品选中
   const handleProductClick = (shopId: string, productId: string) => {
     const newCartList = [...cartList]
     const shop = newCartList.find((shop) => shop.shopId === shopId)
-    let shopChecked = true
-    shop?.cartList.forEach((product) => {
-      if (product.productId === productId) {
-        product.isChecked = !product.isChecked
-      }
-      if (!product.isChecked) {
-        shopChecked = false
-      }
-    })
-    shop!.isChecked = shopChecked
-    setCartList(newCartList)
+    if (shop) {
+      let shopChecked = true
+      shop.cartList.forEach((product) => {
+        if (product.productId === productId) {
+          product.isChecked = !product.isChecked
+        }
+        if (!product.isChecked) {
+          shopChecked = false
+        }
+      })
+      shop.isChecked = shopChecked
+      setCartList(newCartList)
+    }
   }
 
   // 全选

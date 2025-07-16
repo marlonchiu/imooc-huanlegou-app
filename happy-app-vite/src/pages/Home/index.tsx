@@ -46,7 +46,7 @@ function Home() {
             data: { latitude, longitude }
           })
         },
-        (error: any) => {
+        (error: GeolocationPositionError) => {
           console.log(error)
           // message(error?.message)
           message('获取位置异常')

@@ -6,9 +6,11 @@ import sloganWordIcon from '../../images/slogan_word_icon.png'
 
 const Guide = () => {
   // 处理动画逻辑
-  const ref = useRef<HTMLDivElement>(null!)
+  const ref = useRef<HTMLDivElement>(null)
   useEffect(() => {
-    ref.current.style.opacity = '1'
+    if (ref.current) {
+      ref.current.style.opacity = '1'
+    }
   }, [])
 
   // 处理路由跳转逻辑

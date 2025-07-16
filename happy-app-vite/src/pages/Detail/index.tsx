@@ -63,7 +63,7 @@ function Detail() {
       method: 'GET',
       params: { id: params.id, count: cartTempCount }
     })
-      .then((res) => {
+      .then((_res) => {
         setShowCart(false)
         setCardCount(cartTempCount)
       })
