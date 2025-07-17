@@ -48,22 +48,46 @@ function updateDom(dom, preProps, nextProps) {
     })
 }
 
-function commitWork(fiber) {
-  console.log('🚀 ~ commitWork ~ fiber:', fiber)
+// 专门处理删除操作的函数
+function commitDeletion(fiber, domParent) {
+  if (fiber.dom) {
+    // 如果 fiber 有对应的 DOM 节点，直接删除
+    try {
+      domParent.removeChild(fiber.dom)
+      console.log('SUCCESSFULLY DELETED DOM for', fiber.type)
+    } catch (error) {
+      console.warn('Failed to remove DOM for', fiber.type, error)
+    }
+  } else {
+    // 如果 fiber 没有对应的 DOM 节点（比如函数组件），递归删除子节点
+    commitDeletion(fiber.child, domParent)
+  }
+}
 
+function commitWork(fiber) {
+  // console.log('🚀 ~ commitWork ~ fiber:', fiber)
   if (!fiber) {
     return
   }
-  console.log('🚀 ~ commitWork ~ fiber:', fiber.effectTag)
+  console.log('🚀 ~ commitWork ~ fiber.effectTag:', fiber.effectTag)
 
-  const parentDom = fiber.parent.dom
+  // 找到有 DOM 节点的父级
+  let domParentFiber = fiber.parent
+  while (!domParentFiber.dom) {
+    domParentFiber = domParentFiber.parent
+  }
+  const domParent = domParentFiber.dom
+
   if (fiber.effectTag === 'PLACEMENT' && fiber.dom != null) {
-    parentDom.appendChild(fiber.dom)
+    // console.log('EXECUTING PLACEMENT for', fiber.type)
+    domParent.appendChild(fiber.dom)
   } else if (fiber.effectTag === 'UPDATE' && fiber.dom != null) {
+    // console.log('EXECUTING UPDATE for', fiber.type)
     updateDom(fiber.dom, fiber.alternate.props, fiber.props)
   } else if (fiber.effectTag === 'DELETION') {
-    // commitDeletions(fiber, parentDom)
-    parentDom.removeChild(fiber.dom)
+    // console.log('EXECUTING DELETION for', fiber.type)
+    commitDeletion(fiber, domParent)
+    return // 删除操作不需要继续处理子节点
   }
 
   commitWork(fiber.child)
@@ -72,7 +96,9 @@ function commitWork(fiber) {
 
 // commit 函数 用于一次性更新DOM
 function commitRoot() {
-  deletions.forEach((fiber) => commitWork(fiber))
+  deletions.forEach((fiber) => {
+    commitWork(fiber)
+  })
   commitWork(wipRoot.child)
   currentRoot = wipRoot
   wipRoot = null
@@ -83,6 +109,7 @@ function reconcileChildren(wipFiber, elements) {
   let index = 0
   let oldFiber = wipFiber.alternate && wipFiber.alternate.child
   let prevSibling = null
+
   while (index < elements.length || oldFiber != null) {
     // 1.fiber ,fiber 合并成一个大树，删掉老fiber 上需要删除的东西
     const element = elements[index]
@@ -100,6 +127,7 @@ function reconcileChildren(wipFiber, elements) {
         alternate: oldFiber,
         effectTag: 'UPDATE'
       }
+      // console.log('✅ Created UPDATE fiber for', element.type)
     }
 
     if (element && !sameType) {
@@ -112,25 +140,30 @@ function reconcileChildren(wipFiber, elements) {
         alternate: null,
         effectTag: 'PLACEMENT'
       }
+      // console.log('✅ Created PLACEMENT fiber for', element.type)
     }
 
     if (oldFiber && !sameType) {
       // 删除
       oldFiber.effectTag = 'DELETION'
       deletions.push(oldFiber)
+      // console.log('✅ Marked DELETION fiber for', oldFiber.type)
     }
 
     if (oldFiber) {
       oldFiber = oldFiber.sibling
     }
 
-    if (index === 0) {
-      wipFiber.child = newFiber
-    } else {
-      prevSibling.sibling = newFiber
+    // 只有当 newFiber 存在时才进行链接操作
+    if (newFiber) {
+      if (index === 0) {
+        wipFiber.child = newFiber
+      } else if (prevSibling) {
+        prevSibling.sibling = newFiber
+      }
+      prevSibling = newFiber
     }
 
-    prevSibling = newFiber
     index++
   }
 }
@@ -138,8 +171,6 @@ function reconcileChildren(wipFiber, elements) {
 // 该函数用来处理下一个执行的单元，同时返回下下一个执行单元
 // 用来生成 Fiber Tree 的一个函数，生成 fiber tree 的过程，在 React中叫做 render
 function performUnitOfWork(fiber) {
-  console.log('🚀 ~ performUnitOfWork ~ fiber:', fiber)
-
   // 1.把 fiber 对应的内容渲染到页面上
   if (!fiber.dom) {
     fiber.dom = ReactDOM.createDom(fiber)
@@ -192,18 +223,22 @@ function performUnitOfWork(fiber) {
 // 自动调度
 function workLoop(deadline) {
   console.log('🚀 ~ workLoop ~ deadline:', deadline, deadline.timeRemaining())
+  // 处理工作单元
+
   while (nextUnitOfWork) {
     nextUnitOfWork = performUnitOfWork(nextUnitOfWork)
   }
 
+  // 提交阶段
   if (!nextUnitOfWork && wipRoot) {
-    console.log('render commit')
+    console.log('@@@@@@@@@@@@@@@@@render commit')
     // fiber tree 已经准备好了，需要一次性的挂载 DOM
     // 一次性把 fiber tree 的内容渲染到页面上，这个过程叫做 react 中的 commit 阶段
     commitRoot()
-    // requestIdleCallback(workLoop)
   }
-  // requestIdleCallback(workLoop)
+
+  // 确保持续调度
+  requestIdleCallback(workLoop)
 }
 
 requestIdleCallback(workLoop)
@@ -220,7 +255,6 @@ const ReactDOM = {
     return dom
   },
   render: function (element, container) {
-    console.log('🚀 ~ element:', element)
     wipRoot = {
       dom: container,
       props: {
